@@ -22,15 +22,9 @@ class LinkedList
   end
 
   def prepend(value)
-    node = Node.new(value)
-
-    if head.nil?
-      @head = node
-    else
-      node.next_node = head
-      @head = node
-    end
-
+    node = Node.new(value, head)
+    @head = node
+    @tail = node if tail.nil?
     @size += 1
   end
 
@@ -77,8 +71,7 @@ class LinkedList
   end
 
   def insert_at(value, index)
-    new_node = Node.new(value)
-    new_node.next_node = at(index)
+    new_node = Node.new(value, at(index))
     if index == 0
       @head = new_node
     else
